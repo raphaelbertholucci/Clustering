@@ -12,7 +12,19 @@ df.head()
 
 del df['Bankrupt']
 
+####    K-means method    ####
+
 import sklearn.cluster as cluster
+
+# We will use 2 Variables for this example
+kmeans = cluster.KMeans(n_clusters=30 ,init="k-means++")
+kmeans = kmeans.fit(df)
+print('\n\n K-means method:\n\n')
+print(kmeans.cluster_centers_)
+
+
+####    Elbow Method to Indetify Clusters    ####
+####    WSS -> Within-Cluster-Sum of Squared    ####
 
 K = range(1,30)
 wss = []
@@ -23,4 +35,5 @@ for k in K:
     wss.append(wss_iter)
 
 mycenters = pd.DataFrame({'Clusters' : K, 'WSS' : wss})
+print('\n\n Using Elbow Method:\n\n')
 print(mycenters)
